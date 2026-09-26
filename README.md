@@ -1,0 +1,1 @@
+QuizCraft is an interactive quiz platform where users can explore, search, create, and participate in quizzes. It supports categories like Technology, Science, and Geography, live quiz joining through PINs, performance tracking, quiz history, and score analysis, providing an engaging and competitive learning experience.

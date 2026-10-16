@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background-color: #f2f2f2;
+            padding-top: 100px;
+        }
+
+        .box {
+            background: white;
+            width: 300px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        button {
+            padding: 10px 25px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #dashboard {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LOGIN PAGE -->
+    <div class="box" id="login">
+
+        <h2>Login</h2>
+
+        <input type="text" id="username" placeholder="Enter Username">
+
+        <br>
+
+        <input type="password" id="password" placeholder="Enter Password">
+
+        <br>
+
+        <button onclick="loginUser()">Login</button>
+
+        <p id="message"></p>
+
+    </div>
+
+
+    <!-- DASHBOARD -->
+    <div class="box" id="dashboard">
+
+        <h2>Dashboard</h2>
+
+        <h3 id="welcome"></h3>
+
+        <p>You are successfully logged in.</p>
+
+        <button onclick="logout()">Logout</button>
+
+    </div>
+
+
+    <script>
+
+        // LOGIN
+        function loginUser() {
+
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+
+            if (username == "" || password == "") {
+
+                document.getElementById("message").innerHTML =
+                    "Please enter username and password.";
+
+                return;
+            }
+
+            // Store username in localStorage
+            localStorage.setItem("username", username);
+
+            // Store login session
+            sessionStorage.setItem("loggedIn", "true");
+
+            // Show dashboard
+            showDashboard();
+        }
+
+
+        // SHOW DASHBOARD
+        function showDashboard() {
+
+            document.getElementById("login").style.display = "none";
+            document.getElementById("dashboard").style.display = "block";
+
+            let username = localStorage.getItem("username");
+
+            document.getElementById("welcome").innerHTML =
+                "Welcome, " + username + "!";
+        }
+
+
+        // LOGOUT
+        function logout() {
+
+            // Clear login session
+            sessionStorage.removeItem("loggedIn");
+
+            // Show login page
+            document.getElementById("dashboard").style.display = "none";
+            document.getElementById("login").style.display = "block";
+        }
+
+
+        // CHECK SESSION WHEN PAGE LOADS
+        window.onload = function() {
+
+            if (sessionStorage.getItem("loggedIn") == "true") {
+
+                showDashboard();
+
+            }
+
+        };
+
+    </script>
+
+</body>
+</html>
+```
